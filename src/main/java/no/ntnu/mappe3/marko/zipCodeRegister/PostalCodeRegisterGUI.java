@@ -86,10 +86,13 @@ public class PostalCodeRegisterGUI extends Application
         TableColumn<PostalCode, String> zipColumn = new TableColumn<>("Zip");
         zipColumn.setCellValueFactory(new PropertyValueFactory<>("zipCode"));
 
+        TableColumn<PostalCode, String> townColumn = new TableColumn<>("City / Town");
+        townColumn.setCellValueFactory(new PropertyValueFactory<>("townName"));
+
         TableColumn<PostalCode, String> municipalityColumn = new TableColumn<>("Municipality");
         municipalityColumn.setCellValueFactory(new PropertyValueFactory<>("municipalityName"));
 
-        postalCodeTableView.getColumns().addAll(Arrays.asList(zipColumn, municipalityColumn));
+        postalCodeTableView.getColumns().addAll(Arrays.asList(zipColumn, townColumn, municipalityColumn));
         postalCodeTableView.setItems(this.controller.getPostalCodeObservableList());
         //Set a default sort column
         postalCodeTableView.getSortOrder().add(zipColumn);
