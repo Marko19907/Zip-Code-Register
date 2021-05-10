@@ -3,6 +3,7 @@ package no.ntnu.mappe3.marko.zipCodeRegister;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Class PostalCodeRegister is a simple register that can hold PostalCodes in memory.
@@ -43,6 +44,42 @@ public class PostalCodeRegister
     public List<PostalCode> getPostalCodes()
     {
         return new ArrayList<>(this.postalCodes.values());
+    }
+
+    /**
+     * Returns a List of postal codes that contain the given town name
+     * @param searchString The town name to search with, not null
+     * @return A List of postal codes that contain the given town name
+     * @throws IllegalArgumentException If the given searchString is null
+     */
+    public List<PostalCode> getPostalCodesByTown(String searchString)
+    {
+        if (searchString == null) {
+            throw new IllegalArgumentException("The given search String can not be null!");
+        }
+
+        return this.postalCodes.values().stream()
+                .filter(postalCode ->
+                        postalCode.getTownName().toLowerCase().contains(searchString.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns a List of postal codes that contain the given zip String
+     * @param searchString The zip String to search with, not null
+     * @return A List of postal codes that contain the given zip String
+     * @throws IllegalArgumentException If the given searchString is null
+     */
+    public List<PostalCode> getPostalCodesByZip(String searchString)
+    {
+        if (searchString == null) {
+            throw new IllegalArgumentException("The given search String can not be null!");
+        }
+
+        return this.postalCodes.values().stream()
+                .filter(postalCode ->
+                        postalCode.getZipCode().toLowerCase().contains(searchString.toLowerCase()))
+                .collect(Collectors.toList());
     }
 
     /**

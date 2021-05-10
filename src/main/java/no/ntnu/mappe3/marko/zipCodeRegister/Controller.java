@@ -38,9 +38,12 @@ public class Controller
      */
     private void fillWithDemoEntities()
     {
-        this.postalCodeRegister.addPostalCode(new PostalCode("TestName1", "1234"));
-        this.postalCodeRegister.addPostalCode(new PostalCode("TestName2", "4321"));
-        this.postalCodeRegister.addPostalCode(new PostalCode("TestName3", "6789"));
+        this.postalCodeRegister
+                .addPostalCode(new PostalCode("TestTown1", "TestName1", "1234"));
+        this.postalCodeRegister
+                .addPostalCode(new PostalCode("TestTown2", "TestName2", "4321"));
+        this.postalCodeRegister
+                .addPostalCode(new PostalCode("TestTown3", "TestName3", "6789"));
 
         this.updateObservableList();
     }
@@ -60,5 +63,37 @@ public class Controller
     public ObservableList<PostalCode> getPostalCodeObservableList()
     {
         return this.postalCodeObservableList;
+    }
+
+    /**
+     * Displays only the PostalCodes that contain the given String in the table
+     * @param searchString The zip String to search with, not null
+     */
+    public void doSearchByZip(String searchString)
+    {
+        if (searchString != null) {
+            if (searchString.isBlank()) {
+                this.updateObservableList();
+            }
+
+            this.postalCodeObservableList
+                    .setAll(this.postalCodeRegister.getPostalCodesByZip(searchString));
+        }
+    }
+
+    /**
+     * Displays only the PostalCodes that contain the given String in the table
+     * @param searchString The town String to search with, not null
+     */
+    public void doSearchByTown(String searchString)
+    {
+        if (searchString != null) {
+            if (searchString.isBlank()) {
+                this.updateObservableList();
+            }
+
+            this.postalCodeObservableList
+                    .setAll(this.postalCodeRegister.getPostalCodesByTown(searchString));
+        }
     }
 }
