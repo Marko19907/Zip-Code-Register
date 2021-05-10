@@ -1,14 +1,18 @@
 package no.ntnu.mappe3.marko.zipCodeRegister;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToolBar;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -62,14 +66,14 @@ public class PostalCodeRegisterGUI extends Application
     }
 
     /**
-     * Returns the center HBox
-     * @return The center HBox
+     * Returns the center VBox
+     * @return The center VBox
      */
-    private HBox setupCenter()
+    private VBox setupCenter()
     {
-        HBox centerBox = new HBox();
-        centerBox.getChildren().add(this.setupCenterTable());
-        HBox.setHgrow(centerBox.getChildren().get(0), Priority.ALWAYS);
+        VBox centerBox = new VBox();
+        centerBox.getChildren().addAll(this.setupTopToolBox(), this.setupCenterTable());
+        VBox.setVgrow(centerBox.getChildren().get(1), Priority.ALWAYS);
         return centerBox;
     }
 
@@ -98,5 +102,43 @@ public class PostalCodeRegisterGUI extends Application
         postalCodeTableView.getSortOrder().add(zipColumn);
 
         return postalCodeTableView;
+    }
+
+    /**
+     * Sets up the top ToolBar
+     * @return The top ToolBar
+     */
+    private ToolBar setupTopToolBox()
+    {
+        ToolBar toolBar = new ToolBar();
+        toolBar.setPadding(new Insets(5, 5, 5, 5));
+
+        String[] choices = {
+                "By zip",
+                "By city / town"
+        };
+        ChoiceBox<String> choiceBox = new ChoiceBox<>();
+        choiceBox.getItems().addAll(choices);
+        choiceBox.setValue(choices[0]);
+
+        TextField textField = new TextField();
+        textField.setPromptText("Search");
+        textField.textProperty().addListener((obs, oldValue, newValue) -> {
+            switch (choiceBox.getValue()) {
+                case "By zip":
+                    if (newValue != null) {
+                        this.controller.doSearchByZip(newValue);
+                    }
+                    break;
+                case "By city / town":
+                    if (newValue != null) {
+                        this.controller.doSearchByTown(newValue);
+                    }
+                    break;
+            }
+        });
+
+        toolBar.getItems().addAll(choiceBox, textField);
+        return toolBar;
     }
 }
