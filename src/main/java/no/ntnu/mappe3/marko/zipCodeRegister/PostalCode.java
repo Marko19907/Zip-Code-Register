@@ -10,6 +10,11 @@ package no.ntnu.mappe3.marko.zipCodeRegister;
 public class PostalCode
 {
     /**
+     * The town name as a String
+     */
+    private final String townName;
+
+    /**
      * The municipality name as a String
      */
     private final String municipalityName;
@@ -21,23 +26,34 @@ public class PostalCode
 
     /**
      * Constructor for PostalCode objects
+     * @param townName         The name of the city/town, not null or blank
      * @param municipalityName The name of the municipality as a String, not null or blank
      * @param zipCode          The zip code as a String, not null or blank
      * @throws IllegalArgumentException If one of the given Strings is null or blank
      */
-    public PostalCode(String municipalityName, String zipCode)
+    public PostalCode(String townName, String municipalityName, String zipCode)
     {
-        if (municipalityName == null || zipCode == null) {
+        if (townName == null || municipalityName == null || zipCode == null) {
             throw new IllegalArgumentException(
-                    "municipalityName or zipCode can not be null!");
+                    "townName, municipalityName or zipCode can not be null!");
         }
-        if (municipalityName.isBlank() || zipCode.isBlank()) {
+        if (townName.isBlank() || municipalityName.isBlank() || zipCode.isBlank()) {
             throw new IllegalArgumentException(
-                    "municipalityName or zipCode can not be blank!");
+                    "townName, municipalityName or zipCode can not be blank!");
         }
 
+        this.townName = townName;
         this.municipalityName = municipalityName;
         this.zipCode = zipCode;
+    }
+
+    /**
+     * Returns the town/city name as a String
+     * @return The town/city name as a String
+     */
+    public String getTownName()
+    {
+        return this.townName;
     }
 
     /**
