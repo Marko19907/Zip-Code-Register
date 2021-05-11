@@ -140,6 +140,15 @@ public class PostalCodeRegisterGUI extends Application
                         this.controller.doSearchByTown(newValue);
                         break;
                 }
+                this.refreshTable();
+            }
+        });
+
+        // Clear the text in the search TextField when the search parameter changes
+        choiceBox.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
+            if (oldValue != null && newValue != null && !oldValue.equals(newValue)) {
+                textField.clear();
+                this.refreshTable();
             }
         });
 
