@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
  * Class PostalCodeRegister is a simple register that can hold PostalCodes in memory.
  *
  * @author Marko
- * @version 10-05-2021
+ * @version 11-05-2021
  */
 public class PostalCodeRegister
 {
@@ -48,14 +48,14 @@ public class PostalCodeRegister
 
     /**
      * Returns a List of postal codes that contain the given town name
-     * @param searchString The town name to search with, not null
+     * @param searchString The town name to search with, not null or blank
      * @return A List of postal codes that contain the given town name
-     * @throws IllegalArgumentException If the given searchString is null
+     * @throws IllegalArgumentException If the given searchString is null or blank
      */
     public List<PostalCode> getPostalCodesByTown(String searchString)
     {
-        if (searchString == null) {
-            throw new IllegalArgumentException("The given search String can not be null!");
+        if (searchString == null || searchString.isBlank()) {
+            throw new IllegalArgumentException("The given search String can not be null or blank!");
         }
 
         return this.postalCodes.values().stream()
@@ -66,14 +66,14 @@ public class PostalCodeRegister
 
     /**
      * Returns a List of postal codes that contain the given zip String
-     * @param searchString The zip String to search with, not null
+     * @param searchString The zip String to search with, not null or blank
      * @return A List of postal codes that contain the given zip String
-     * @throws IllegalArgumentException If the given searchString is null
+     * @throws IllegalArgumentException If the given searchString is null or blank
      */
     public List<PostalCode> getPostalCodesByZip(String searchString)
     {
-        if (searchString == null) {
-            throw new IllegalArgumentException("The given search String can not be null!");
+        if (searchString == null || searchString.isBlank()) {
+            throw new IllegalArgumentException("The given search String can not be null or blank!");
         }
 
         return this.postalCodes.values().stream()

@@ -75,9 +75,10 @@ public class Controller
             if (searchString.isBlank()) {
                 this.updateObservableList();
             }
-
-            this.postalCodeObservableList
-                    .setAll(this.postalCodeRegister.getPostalCodesByZip(searchString));
+            else {
+                this.postalCodeObservableList
+                        .setAll(this.postalCodeRegister.getPostalCodesByZip(searchString));
+            }
         }
     }
 
@@ -91,9 +92,10 @@ public class Controller
             if (searchString.isBlank()) {
                 this.updateObservableList();
             }
-
-            this.postalCodeObservableList
-                    .setAll(this.postalCodeRegister.getPostalCodesByTown(searchString));
+            else {
+                this.postalCodeObservableList
+                        .setAll(this.postalCodeRegister.getPostalCodesByTown(searchString));
+            }
         }
     }
 }
