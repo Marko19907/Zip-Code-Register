@@ -1,6 +1,7 @@
 package no.ntnu.mappe3.marko.zipCodeRegister;
 
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
@@ -11,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -53,6 +55,7 @@ public class PostalCodeRegisterGUI extends Application
     {
         BorderPane root = new BorderPane();
         root.setCenter(this.setupCenter());
+        root.setBottom(this.setupBottomLabel());
 
         primaryStage.setTitle("Postal Code Register");
         primaryStage.setMinWidth(500);
@@ -136,5 +139,24 @@ public class PostalCodeRegisterGUI extends Application
 
         toolBar.getItems().addAll(choiceBox, textField);
         return toolBar;
+    }
+
+    /**
+     * Sets up the bottom HBox
+     * @return The bottom HBox
+     */
+    private HBox setupBottomLabel()
+    {
+        HBox bottomBox = new HBox();
+        int padding = 2;
+        bottomBox.setPadding(new Insets(padding, padding, padding, padding));
+        bottomBox.setStyle("-fx-background-color: #d5d5d5");
+        Label descriptionLabel = new Label("Entities shown: ");
+
+        Label sizeLabel = new Label();
+        sizeLabel.textProperty().bind(Bindings.size(this.controller.getPostalCodeObservableList()).asString());
+
+        bottomBox.getChildren().addAll(descriptionLabel, sizeLabel);
+        return bottomBox;
     }
 }
