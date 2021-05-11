@@ -34,11 +34,18 @@ public class PostalCodeRegisterGUI extends Application
     private final Controller controller;
 
     /**
+     * The TableView that displays PostalCodes
+     */
+    private final TableView<PostalCode> postalCodeTableView;
+
+
+    /**
      * PostalCodeRegisterGUI constructor
      */
     public PostalCodeRegisterGUI()
     {
         this.controller = new Controller();
+        this.postalCodeTableView = new TableView<>();
     }
 
     /**
@@ -86,9 +93,8 @@ public class PostalCodeRegisterGUI extends Application
      */
     private TableView<PostalCode> setupCenterTable()
     {
-        TableView<PostalCode> postalCodeTableView = new TableView<>();
-        postalCodeTableView.setPlaceholder(new Label("No zip codes to display"));
-        postalCodeTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        this.postalCodeTableView.setPlaceholder(new Label("No zip codes to display"));
+        this.postalCodeTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         TableColumn<PostalCode, String> zipColumn = new TableColumn<>("Zip");
         zipColumn.setCellValueFactory(new PropertyValueFactory<>("zipCode"));
@@ -99,12 +105,12 @@ public class PostalCodeRegisterGUI extends Application
         TableColumn<PostalCode, String> municipalityColumn = new TableColumn<>("Municipality");
         municipalityColumn.setCellValueFactory(new PropertyValueFactory<>("municipalityName"));
 
-        postalCodeTableView.getColumns().addAll(Arrays.asList(zipColumn, townColumn, municipalityColumn));
-        postalCodeTableView.setItems(this.controller.getPostalCodeObservableList());
+        this.postalCodeTableView.getColumns().addAll(Arrays.asList(zipColumn, townColumn, municipalityColumn));
+        this.postalCodeTableView.setItems(this.controller.getPostalCodeObservableList());
         //Set a default sort column
-        postalCodeTableView.getSortOrder().add(zipColumn);
+        this.postalCodeTableView.getSortOrder().add(zipColumn);
 
-        return postalCodeTableView;
+        return this.postalCodeTableView;
     }
 
     /**
@@ -158,5 +164,14 @@ public class PostalCodeRegisterGUI extends Application
 
         bottomBox.getChildren().addAll(descriptionLabel, sizeLabel);
         return bottomBox;
+    }
+
+    /**
+     * Refreshes the table and forces a sort of the data.
+     */
+    private void refreshTable()
+    {
+        this.postalCodeTableView.refresh();
+        this.postalCodeTableView.sort();
     }
 }
