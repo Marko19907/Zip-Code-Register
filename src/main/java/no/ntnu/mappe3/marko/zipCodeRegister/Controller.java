@@ -3,12 +3,14 @@ package no.ntnu.mappe3.marko.zipCodeRegister;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.List;
+
 /**
  * Class Controller represents the main controller of the application.
  * It is responsible for handling the events from the GUI.
  *
  * @author Marko
- * @version 10-05-2021
+ * @version 11-05-2021
  */
 public class Controller
 {
@@ -28,9 +30,22 @@ public class Controller
     public Controller()
     {
         this.postalCodeRegister = new PostalCodeRegister();
+        this.loadPostalCodeData();
         this.postalCodeObservableList = FXCollections.observableArrayList(this.postalCodeRegister.getPostalCodes());
 
-        this.fillWithDemoEntities();
+        //this.fillWithDemoEntities();
+    }
+
+    /**
+     * Loads the data from the txt file of PostalCodes into the register
+     */
+    private void loadPostalCodeData()
+    {
+        TXTFileReader fileReader = new TXTFileReader();
+        List<PostalCode> postalCodesList = fileReader.loadData();
+        if (postalCodesList != null) {
+            this.postalCodeRegister.addPostalCodes(postalCodesList);
+        }
     }
 
     /**

@@ -38,6 +38,17 @@ public class PostalCodeRegister
     }
 
     /**
+     * Adds a given List of PostalCodes to the register
+     * @param postalCodes The PostalCode List to add, not null
+     */
+    public void addPostalCodes(List<PostalCode> postalCodes)
+    {
+        if (postalCodes != null) {
+            postalCodes.forEach(this::addPostalCode);
+        }
+    }
+
+    /**
      * Returns a List of all postal codes in the register
      * @return A List of all postal codes in the register
      */
