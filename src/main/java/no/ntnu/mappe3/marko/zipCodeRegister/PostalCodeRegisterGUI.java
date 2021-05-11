@@ -22,7 +22,7 @@ import java.util.Arrays;
  * Class PostalCodeRegisterGUI represents the main window of the application.
  *
  * @author Marko
- * @version 10-05-2021
+ * @version 11-05-2021
  */
 public class PostalCodeRegisterGUI extends Application
 {
@@ -113,28 +113,24 @@ public class PostalCodeRegisterGUI extends Application
         ToolBar toolBar = new ToolBar();
         toolBar.setPadding(new Insets(5, 5, 5, 5));
 
-        String[] choices = {
-                "By zip",
-                "By city / town"
-        };
+        final String byZip = "By zip";
+        final String byTown = "By city / town";
         ChoiceBox<String> choiceBox = new ChoiceBox<>();
-        choiceBox.getItems().addAll(choices);
-        choiceBox.setValue(choices[0]);
+        choiceBox.getItems().addAll(byZip, byTown);
+        choiceBox.setValue(byZip);
 
         TextField textField = new TextField();
         textField.setPromptText("Search");
         textField.textProperty().addListener((obs, oldValue, newValue) -> {
-            switch (choiceBox.getValue()) {
-                case "By zip":
-                    if (newValue != null) {
+            if (newValue != null) {
+                switch (choiceBox.getValue()) {
+                    case byZip:
                         this.controller.doSearchByZip(newValue);
-                    }
-                    break;
-                case "By city / town":
-                    if (newValue != null) {
+                        break;
+                    case byTown:
                         this.controller.doSearchByTown(newValue);
-                    }
-                    break;
+                        break;
+                }
             }
         });
 
