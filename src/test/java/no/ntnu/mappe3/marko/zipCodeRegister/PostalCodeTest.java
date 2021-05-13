@@ -1,5 +1,6 @@
 package no.ntnu.mappe3.marko.zipCodeRegister;
 
+import no.ntnu.mappe3.marko.zipCodeRegister.model.PostalCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

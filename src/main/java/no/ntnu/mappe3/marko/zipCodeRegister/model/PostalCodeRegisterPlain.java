@@ -1,4 +1,4 @@
-package no.ntnu.mappe3.marko.zipCodeRegister;
+package no.ntnu.mappe3.marko.zipCodeRegister.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;

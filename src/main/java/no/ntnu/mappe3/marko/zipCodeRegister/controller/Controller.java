@@ -1,7 +1,11 @@
-package no.ntnu.mappe3.marko.zipCodeRegister;
+package no.ntnu.mappe3.marko.zipCodeRegister.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import no.ntnu.mappe3.marko.zipCodeRegister.model.PostalCode;
+import no.ntnu.mappe3.marko.zipCodeRegister.model.PostalCodeRegister;
+import no.ntnu.mappe3.marko.zipCodeRegister.model.PostalCodeRegisterPlain;
+import no.ntnu.mappe3.marko.zipCodeRegister.utility.TXTFileReader;
 
 import java.util.List;
 

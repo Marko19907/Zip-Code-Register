@@ -1,4 +1,4 @@
-package no.ntnu.mappe3.marko.zipCodeRegister;
+package no.ntnu.mappe3.marko.zipCodeRegister.model;
 
 /**
  * The class PostalCode represents a custom data type (entity)

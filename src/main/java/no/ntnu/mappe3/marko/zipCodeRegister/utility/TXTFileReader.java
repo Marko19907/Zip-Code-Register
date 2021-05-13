@@ -1,4 +1,6 @@
-package no.ntnu.mappe3.marko.zipCodeRegister;
+package no.ntnu.mappe3.marko.zipCodeRegister.utility;
+
+import no.ntnu.mappe3.marko.zipCodeRegister.model.PostalCode;
 
 import java.io.File;
 import java.io.IOException;

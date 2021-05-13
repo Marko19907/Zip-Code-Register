@@ -1,4 +1,4 @@
-package no.ntnu.mappe3.marko.zipCodeRegister;
+package no.ntnu.mappe3.marko.zipCodeRegister.view;
 
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
@@ -17,6 +17,8 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import no.ntnu.mappe3.marko.zipCodeRegister.model.PostalCode;
+import no.ntnu.mappe3.marko.zipCodeRegister.controller.Controller;
 
 import java.util.Arrays;
 
