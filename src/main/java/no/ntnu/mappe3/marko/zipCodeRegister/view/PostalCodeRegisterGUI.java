@@ -150,6 +150,8 @@ public class PostalCodeRegisterGUI extends Application
                     case byTown:
                         this.controller.doSearchByTown(newValue);
                         break;
+                    default:
+                        throw new IllegalStateException("Unreachable search case!");
                 }
                 this.refreshTable();
             }
