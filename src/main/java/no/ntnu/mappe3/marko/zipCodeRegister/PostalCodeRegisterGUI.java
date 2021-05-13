@@ -24,7 +24,7 @@ import java.util.Arrays;
  * Class PostalCodeRegisterGUI represents the main window of the application.
  *
  * @author Marko
- * @version 11-05-2021
+ * @version 13-05-2021
  */
 public class PostalCodeRegisterGUI extends Application
 {
@@ -98,6 +98,9 @@ public class PostalCodeRegisterGUI extends Application
 
         TableColumn<PostalCode, String> zipColumn = new TableColumn<>("Zip");
         zipColumn.setCellValueFactory(new PropertyValueFactory<>("zipCode"));
+        zipColumn.setStyle("-fx-alignment: CENTER;");
+        zipColumn.setMinWidth(50);
+        zipColumn.setMaxWidth(50);
 
         TableColumn<PostalCode, String> townColumn = new TableColumn<>("City / Town");
         townColumn.setCellValueFactory(new PropertyValueFactory<>("townName"));
