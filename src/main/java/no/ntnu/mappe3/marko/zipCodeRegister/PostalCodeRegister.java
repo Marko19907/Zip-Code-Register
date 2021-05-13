@@ -1,61 +1,32 @@
 package no.ntnu.mappe3.marko.zipCodeRegister;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
- * Class PostalCodeRegister is a simple register that can hold PostalCodes in memory.
+ * PostalCodeRegister represents an interface for adding, reading and searching operations
  *
  * @author Marko
- * @version 11-05-2021
+ * @version 13-05-2021
  */
-public class PostalCodeRegister
+public interface PostalCodeRegister
 {
-    /**
-     * The HashMap containing the PostalCodes
-     */
-    private final HashMap<String, PostalCode> postalCodes;
-
-    /**
-     * Constructor for PostalCodeRegister objects
-     */
-    public PostalCodeRegister()
-    {
-        this.postalCodes = new HashMap<>();
-    }
-
     /**
      * Adds a given PostalCode to the register
      * @param postalCode The PostalCode to add, not null
      */
-    public void addPostalCode(PostalCode postalCode)
-    {
-        if (postalCode != null && !this.postalCodes.containsKey(postalCode.getZipCode())) {
-            this.postalCodes.put(postalCode.getZipCode(), postalCode);
-        }
-    }
+    void addPostalCode(PostalCode postalCode);
 
     /**
      * Adds a given List of PostalCodes to the register
      * @param postalCodes The PostalCode List to add, not null
      */
-    public void addPostalCodes(List<PostalCode> postalCodes)
-    {
-        if (postalCodes != null) {
-            postalCodes.forEach(this::addPostalCode);
-        }
-    }
+    void addPostalCodes(List<PostalCode> postalCodes);
 
     /**
      * Returns a List of all postal codes in the register
      * @return A List of all postal codes in the register
      */
-    public List<PostalCode> getPostalCodes()
-    {
-        return new ArrayList<>(this.postalCodes.values());
-    }
+    List<PostalCode> getPostalCodes();
 
     /**
      * Returns a List of postal codes that contain the given town name
@@ -63,17 +34,7 @@ public class PostalCodeRegister
      * @return A List of postal codes that contain the given town name
      * @throws IllegalArgumentException If the given searchString is null or blank
      */
-    public List<PostalCode> getPostalCodesByTown(String searchString)
-    {
-        if (searchString == null || searchString.isBlank()) {
-            throw new IllegalArgumentException("The given search String can not be null or blank!");
-        }
-
-        return this.postalCodes.values().stream()
-                .filter(postalCode ->
-                        postalCode.getTownName().toLowerCase().contains(searchString.toLowerCase()))
-                .collect(Collectors.toList());
-    }
+    List<PostalCode> getPostalCodesByTown(String searchString);
 
     /**
      * Returns a List of postal codes that contain the given zip String
@@ -81,24 +42,11 @@ public class PostalCodeRegister
      * @return A List of postal codes that contain the given zip String
      * @throws IllegalArgumentException If the given searchString is null or blank
      */
-    public List<PostalCode> getPostalCodesByZip(String searchString)
-    {
-        if (searchString == null || searchString.isBlank()) {
-            throw new IllegalArgumentException("The given search String can not be null or blank!");
-        }
-
-        return this.postalCodes.values().stream()
-                .filter(postalCode ->
-                        postalCode.getZipCode().toLowerCase().contains(searchString.toLowerCase()))
-                .collect(Collectors.toList());
-    }
+    List<PostalCode> getPostalCodesByZip(String searchString);
 
     /**
      * Returns the number of PostalCodes in the register
      * @return The number of PostalCodes in the register as an int
      */
-    public int getPostalCodesSize()
-    {
-        return this.postalCodes.size();
-    }
+    int getPostalCodesSize();
 }

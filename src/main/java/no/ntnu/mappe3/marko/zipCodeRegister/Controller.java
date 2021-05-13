@@ -10,7 +10,7 @@ import java.util.List;
  * It is responsible for handling the events from the GUI.
  *
  * @author Marko
- * @version 11-05-2021
+ * @version 13-05-2021
  */
 public class Controller
 {
@@ -29,7 +29,7 @@ public class Controller
      */
     public Controller()
     {
-        this.postalCodeRegister = new PostalCodeRegister();
+        this.postalCodeRegister = new PostalCodeRegisterPlain();
         this.loadPostalCodeData();
         this.postalCodeObservableList = FXCollections.observableArrayList(this.postalCodeRegister.getPostalCodes());
 
