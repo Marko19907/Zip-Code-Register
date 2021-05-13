@@ -131,13 +131,19 @@ public class PostalCodeRegisterGUI extends Application
         choiceBox.getItems().addAll(byZip, byTown);
         choiceBox.setValue(byZip);
 
-        TextField textField = new TextField();
-        textField.setPromptText("Search");
-        textField.textProperty().addListener((obs, oldValue, newValue) -> {
-            if (newValue != null) {
+        TextField searchField = new TextField();
+        searchField.setPromptText("Search");
+        searchField.textProperty().addListener((obs, oldValue, newValue) -> {
+            if (oldValue!= null && newValue != null) {
                 switch (choiceBox.getValue()) {
                     case byZip:
-                        this.controller.doSearchByZip(newValue);
+                        // Check if the input is not a digit (0-9)
+                        if (!newValue.matches("\\d*")) {
+                            searchField.setText(oldValue);
+                        }
+                        else {
+                            this.controller.doSearchByZip(newValue);
+                        }
                         break;
                     case byTown:
                         this.controller.doSearchByTown(newValue);
@@ -150,12 +156,12 @@ public class PostalCodeRegisterGUI extends Application
         // Clear the text in the search TextField when the search parameter changes
         choiceBox.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if (oldValue != null && newValue != null && !oldValue.equals(newValue)) {
-                textField.clear();
+                searchField.clear();
                 this.refreshTable();
             }
         });
 
-        toolBar.getItems().addAll(choiceBox, textField);
+        toolBar.getItems().addAll(choiceBox, searchField);
         return toolBar;
     }
 
